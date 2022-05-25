@@ -9,13 +9,15 @@
   <div class="row">
 
     <div class="col-lg-8">
-      {% for i in range %}
+      {% for item in news_qs %}
       <div class="card my-2">
         <div class="card-body">
-          <h5 class="card-title">{{ news_title }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{ datetime_obj|date:"Y-m-d h-i-s" }}</h6>
-          <p class="card-text">{{i}}</p>
-          <a target="_blank" href="https://yandex.ru/search/?text={{i}}" class="card-link">Подробнее</a>
+          <h5 class="card-title">{{ item.title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            {{ item.created|date:"Y-m-d h-i-s" }}
+          </h6>
+          <p class="card-text">{{ item.preambule }}</p>
+
         </div>
       </div>
       {% endfor %}
