@@ -1,6 +1,7 @@
 from multiprocessing import get_context
 from django.views.generic import View, TemplateView
-from datetime import datetime
+from mainapp import models as mainapp_models
+from django.shortcuts import get_object_or_404
 
 class Index(TemplateView):
     template_name = 'mainapp/index.html'
@@ -8,24 +9,17 @@ class Index(TemplateView):
 class News(TemplateView):
     template_name = 'mainapp/news.html'
 
-    def get_news(self):
-        news = [
-            'Их было около дюжины человек, солдат, матросов, недавних вчерашних крестьян, голодных, оборванных, у многих измятые гимнастерки, у некоторых простреленная и обгоревшая одежда. У каждого — револьвер в руке, у кого обрез, у других винтовки',
-            'Солдаты всем сразу дали винтовки и стали учить стрелять.',
-            'К берегам реки приткнула баржу, и около баржи плавало несколько солдат с винтовками.',
-            'RuGPT3: Быстрый как ветер», — кричит с берега Михаил, а ему кричат из толпы ребята, рабочие:',
-            'Небашев пошел к порту и постоял около портовых огней. На берегу видны были факелы, освещающие вход в порт и дебаркадеры. Н'
-        ]
-        return news
-
     def get_context_data(self, **kwargs):
-        # Get all previous data
         context = super().get_context_data(**kwargs)
-        # Create your own data
-        context["news_title"] = "Громкий новостной заголовок"
-        context[ "news_preview"] = "Предварительное описание, которое заинтересует каждого"
-        context["datetime_obj"] = datetime.now()
-        context["range"] = self.get_news()
+        context["news_qs"] = mainapp_models.News.objects.all()[:5]
+        return context
+
+class News_full_view(TemplateView):
+    template_name = "mainapp/news_detail.html"
+    
+    def get_context_data(self, pk=None, **kwargs):
+        context = super().get_context_data(pk=pk, **kwargs)
+        context["news_object"] = get_object_or_404(mainapp_models.News, pk=pk)
         return context
 
 
