@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'markdownify.apps.MarkdownifyConfig',
-    'authapp.apps.AuthappConfig'
+    'authapp.apps.AuthappConfig',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -51,11 +52,14 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                # "mainapp.context_processors.example.simple_context_processor",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.template.context_processors.media",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "mainapp.context_processors.example.simple_context_processor",
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
 
         'libraries':{'email_to_link':'mainapp.context_processors.example'}
@@ -127,3 +131,10 @@ AUTH_USER_MODEL = "authapp.CustomUser"
 LOGIN_REDIRECT_URL = "mainapp:main_page"
 LOGOUT_REDIRECT_URL = "mainapp:main_page"
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.github.GithubOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
+    )
+
+SOCIAL_AUTH_GITHUB_KEY = '8b4874c2b4c54df66fe3'
+SOCIAL_AUTH_GITHUB_SECRET = 'eb18d35d54c609868f9791cf57374bdd8f66605e'

@@ -12,12 +12,12 @@
             <ul class="navbar-nav mr-auto">
                 <li
                     class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.News' %}active{% endif %}">
-                    <a class="nav-link" href="news.html">Новости</a>
+                    <a class="nav-link" href="{% url 'mainapp:news' %}">Новости</a>
                 </li>
 
                 <li
                     class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.Courses' %}active{% endif %}">
-                    <a class="nav-link" href="courses_list.html">Курсы</a>
+                    <a class="nav-link" href="{% url 'mainapp:courses' %}">Курсы</a>
                 </li>
 
                 </li>
@@ -27,18 +27,18 @@
                         Профиль
                     </a>
                     <div class="dropdown-menu" aria-labelledby="ddProfile">
-                        <a class="dropdown-item" href="#">Редактировать профиль</a>
-                        <a class="dropdown-item" href="#">Мои курсы</a>
+                        <a class="dropdown-item" href="{% url 'authapp:profile_edit' %}">Редактировать профиль</a>
+                        <a class="dropdown-item" href="{% url 'mainapp:courses' %}">Мои курсы</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Модерация</a>
                         <a class="dropdown-item" href="#">Административный раздел</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Выход</a>
+                        <a class="dropdown-item" href="{% url 'authapp:logout' %}">Выход</a>
                     </div>
                 </li>
                 <li
                     class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.ContactsPageView' %}active{% endif %}">
-                    <a class="nav-link" href="contacts.html">Контакты</a>
+                    <a class="nav-link" href="{% url 'mainapp:contacts' %}">Контакты</a>
                 </li>
 
             </ul>
