@@ -40,6 +40,12 @@
                     class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.ContactsPageView' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'mainapp:contacts' %}">Контакты</a>
                 </li>
+                <li
+                    class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.ContactsPageView' %}active{% endif %}">
+                    <!-- '''if user вошел то ссылка на выход и наоборот''' -->
+
+                    <a class="nav-link" href="{% url 'authapp:login' %}">вход</a>
+                </li>
 
             </ul>
             <span><a href="#">🇷🇺</a> <i class="fas fa-grip-lines-vertical"></i> <a href="#">🇬🇧</a></span>

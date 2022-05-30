@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)8%fdb3%51xymravhh$zl#u^3#5dmipoui(^f@v##8x#8hmf%^'
+SECRET_KEY =  os.environ.get('django_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'markdownify.apps.MarkdownifyConfig',
     'authapp.apps.AuthappConfig',
     'social_django',
+
+
 ]
 
 MIDDLEWARE = [
@@ -137,4 +139,5 @@ AUTHENTICATION_BACKENDS = (
     )
 
 SOCIAL_AUTH_GITHUB_KEY = '8b4874c2b4c54df66fe3'
-SOCIAL_AUTH_GITHUB_SECRET = 'eb18d35d54c609868f9791cf57374bdd8f66605e'
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('django_git_password')
+AUTH_USER_MODEL = 'authapp.CustomUser' # new
