@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 
 class News(models.Model):
@@ -8,6 +9,13 @@ class News(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
     updated = models.DateTimeField(auto_now=True, verbose_name="Edited", editable=False)
     deleted = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = ('Новости')
+        verbose_name_plural = ('Новости')
+        ordering = ("-created",)
+
+
 
     def __str__(self) -> str:
         return f"{self.pk} {self.title}" #pk- primary key
@@ -41,6 +49,10 @@ class Courses(models.Model):
     def delete(self, *args):
         self.deleted = True
         self.save()
+
+    class Meta:
+        verbose_name = ('Курс')
+        verbose_name_plural = ('Курсы')
 
 class Lesson(models.Model):
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
