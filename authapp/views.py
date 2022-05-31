@@ -12,7 +12,7 @@ class CustomLoginView(LoginView):
     def form_valid(self, form):
         ret = super().form_valid(form)
         message = _("Login success!<br>Hi, %(username)s") % {
-        "username": self.request.user.get_full_name()
+        "user_name": self.request.user.get_full_name()
         if self.request.user.get_full_name()
         else self.request.user.get_username()
         }
@@ -24,23 +24,23 @@ class CustomLoginView(LoginView):
             messages.add_message(
                 self.request,
                 messages.WARNING,
-                mark_safe(f"Something goes worng:<br>{msg}"),
+                mark_safe(f"Что-то пошло нетак:<br>{msg}"),
                 )
         return self.render_to_response(self.get_context_data(form=form))
 
 class CustomLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
-        messages.add_message(self.request, messages.INFO, _("See you later!"))
+        messages.add_message(self.request, messages.INFO, _("Досвидания!"))
         return super().dispatch(request, *args, **kwargs)
 
 class RegisterView(CreateView):
     model = get_user_model()
-    form_class = forms.CustomUserCreationForm
+    form_class = forms.ChangeUserForm
     success_url = reverse_lazy("mainapp:main_page")
 
 class ProfileEditView(UserPassesTestMixin, UpdateView):
     model = get_user_model()
-    form_class = forms.CustomUserChangeForm
+    form_class = forms.ChangeUserForm
 
     def test_func(self):
         return True if self.request.user.pk == self.kwargs.get("pk") else False
