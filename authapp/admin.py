@@ -1,14 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
+from authapp import models
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
-
-class CustomUserAdmin(UserAdmin):
-    add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
-    model = CustomUser
-    list_display = ['email', 'username',]
-
-admin.site.register(CustomUser, CustomUserAdmin)
+@admin.register(models.CustomUser)
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ["id", "username", "email", "is_active", "date_joined"]
+    ordering = ["-date_joined"]
