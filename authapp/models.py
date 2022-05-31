@@ -21,13 +21,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         _("username"),
         max_length=150,
         unique=True,
-        help_text=_('150 символов и цифр включая @ . + - _'
+        help_text=_(
+        "Required. 150 characters or fewer. ASCII letters and digits only."
         ),
-        validators = [username_validator],
-        error_messages = {
-            'unique': _('Пользователь с таким ником уже существует')
-        },
-    )
+        validators=[username_validator],
+        error_messages={
+        "unique": _("A user with that username already exists."),
+        },)
     first_name = models.CharField(_('Имя'), max_length=150, blank=True)
     last_name = models.CharField(_('Фамилия'), max_length=150, blank=True)
 
@@ -42,6 +42,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         full_name = "%s %s" % (self.first_name, self.last_name)
         return full_name.strip()
+        
     def get_short_name(self):
         """Return the short name for the user."""
         return self.first_name
