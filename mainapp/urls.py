@@ -1,5 +1,4 @@
 from django.urls import path
-mainapp/urls.py
 from mainapp import views
 from mainapp.apps import MainappConfig
 

@@ -1,6 +1,12 @@
 from mainapp import models as mainapp_models
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from mainapp import forms as mainapp_forms
+from django.http import JsonResponse
+from django.views.generic import CreateView, UpdateView
 
 
 class MainPageView(TemplateView):
@@ -22,8 +28,6 @@ class NewsPageDetailView(TemplateView):
         context = super().get_context_data(pk=pk, **kwargs)
         context["news_object"] = get_object_or_404(mainapp_models.News, pk=pk)
         return context
-
-
 
 
 class NewsListView(ListView):
