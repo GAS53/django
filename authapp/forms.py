@@ -13,17 +13,19 @@ class ChangeUserForm(forms.ModelForm):
         "password1",
         "password2",
         "email",
+        "mobile",
         "first_name",
         "last_name",
         "age",
         "avatar",
         ]
-    
+
     class Meta:
         model = get_user_model()
         fields = (
             "user_name",
             "email",
+            "mobile",
             "first_name",
             "last_name",
             "age",
