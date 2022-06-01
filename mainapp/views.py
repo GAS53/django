@@ -1,12 +1,15 @@
 from mainapp import models as mainapp_models
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView
+from django.views.generic import TemplateView, View, ListView, CreateView, DetailView, DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from mainapp import forms as mainapp_forms
 from django.http import JsonResponse
 from django.views.generic import CreateView, UpdateView
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.http import FileResponse, JsonResponse
+from config import settings
 
 
 class MainPageView(TemplateView):
@@ -99,3 +102,24 @@ class ContactsPageView(TemplateView):
 
 class DocSitePageView(TemplateView):
     template_name = "mainapp/doc_site.html"
+
+class LogView(TemplateView):
+    template_name = "mainapp/log_view.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(LogView, self).get_context_data(**kwargs)
+        log_slice = []
+        with open(settings.LOG_FILE, "r") as log_file:
+            for i, line in enumerate(log_file):
+                if i == 1000:
+                    break
+                log_slice.insert(0, line)
+                context["log"] = "".join(log_slice)
+        return context
+
+class LogDownloadView(UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def get(self, *args, **kwargs):
+        return FileResponse(open(settings.LOG_FILE, "rb"))

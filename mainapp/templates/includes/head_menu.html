@@ -38,6 +38,7 @@
                         {% if user.is_supreuser %}
                         <a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Административный
                             раздел</a>
+                        <a class="dropdown-item" href="{% url 'mainapp:log_view' %}" target="_blank">Лог</a>
                         {% endif %}
 
                         <div class="dropdown-divider"></div>

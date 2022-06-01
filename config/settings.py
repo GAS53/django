@@ -14,6 +14,9 @@ SECRET_KEY = os.environ.get('django_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if DEBUG:
+    INTERNAL_IPS = ["127.0.0.1",]
+
 
 ALLOWED_HOSTS = []
 
@@ -69,6 +72,14 @@ TEMPLATES = [
         },
     },
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+        "OPTIONS": {
+        "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },}}
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -143,3 +154,18 @@ SOCIAL_AUTH_GITHUB_KEY = '8b4874c2b4c54df66fe3'
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('django_git_password')
 AUTH_USER_MODEL = 'authapp.CustomUser'
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+LOG_FILE = BASE_DIR / "var" / "log" / "main_log.log"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console": {
+            "format": "[%(asctime)s] %(levelname)s %(name)s (%(lineno)d)%(message)s"},
+    },
+    "handlers": {
+        "console": {"class": "logging.StreamHandler", "formatter": "console"}, },
+    "loggers": {"django": {"level": "INFO", "handlers": ["console"]},
+    },
+}
+
