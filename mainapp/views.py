@@ -40,9 +40,9 @@ class NewsListView(ListView):
 
 class NewsCreateView(PermissionRequiredMixin, CreateView):
     model = mainapp_models.News
-    fields = "__all__"
+    fields = "__all__" # использование всех полей
     success_url = reverse_lazy("mainapp:news")
-    permission_required = ("mainapp.add_news",)
+    permission_required = ("mainapp.add_news",) # PermissionRequiredMixin проверять, предоставляются ли пользователю права для создания  новостей
 
 class NewsDetailView(DetailView):
     model = mainapp_models.News
@@ -72,10 +72,8 @@ class CoursesDetailView(TemplateView):
 
     def get_context_data(self, pk=None, **kwargs):
         context = super(CoursesDetailView, self).get_context_data(**kwargs)
-        context["course_object"] = get_object_or_404(
-        mainapp_models.Courses, pk=pk)
-        context["lessons"] = mainapp_models.Lesson.objects.filter(
-        course=context["course_object"])
+        context["course_object"] = get_object_or_404(mainapp_models.Courses, pk=pk)
+        context["lessons"] = mainapp_models.Lesson.objects.filter(course=context["course_object"])
         context["teachers"] = mainapp_models.CourseTeachers.objects.filter(
         course=context["course_object"])
         if not self.request.user.is_anonymous:
@@ -83,8 +81,7 @@ class CoursesDetailView(TemplateView):
                 course=context["course_object"], user=self.request.user).count():
                 context["feedback_form"] = mainapp_forms.CourseFeedbackForm(course=context["course_object"], user=self.request.user)
         context["feedback_list"] = mainapp_models.CourseFeedback.objects.filter(
-            course=context["course_object"]
-        ).order_by("-created", "-rating")[:5]
+            course=context["course_object"]).order_by("-created", "-rating")[:5]
         return context
 
 class CourseFeedbackFormProcessView(LoginRequiredMixin, CreateView):

@@ -14,38 +14,27 @@ def users_avatars_path(instance, filename):
     suff = Path(filename).suffix
     return f"user_{instance.user_name}/avatars/pic_{num}{suff}"
 
+class UserManager(BaseUserManager):
+    def create_user(self, user_name, password=None):
+        if not user_name:
+            raise ValueError('Должно быть задано имя пользователя')
 
-class CustomAccountManager(BaseUserManager):
+        user = self.model(user_name=user_name)
 
-    def create_user(self, position, email, user_name, password, **other_fields):
-        
-        if not email:
-            raise ValueError(_('Email должен быть для создания пользователя'))
-        elif not password:
-            raise ValueError(_('необходимо задать пароль'))
-        elif not user_name:
-            raise ValueError(_('невозможно создать пользователя без имени'))
-
-        if position == 'staff':
-            other_fields.setdefault('is_staff', True)
-            position = 'админ без доступа к новостям'
-        elif position == 'superuser':
-            other_fields.setdefault('is_staff', True)
-            other_fields.setdefault('is_superuser', True)
-            position = 'суперпользователь'
-        elif position == 'news_manadjer':
-            other_fields.setdefault('is_staff', True)
-            other_fields.setdefault('is_news_manadjer', True)
-            position = 'менеджер новостей'
-        else:
-            position = 'обычный пользователь'
-        messages.add_message(self.request, messages.INFO, _(f"создан {position} \n{self.request.user.get_full_name()}"))
-
-        user = self.model(email=email, user_name=user_name, **other_fields)
         user.set_password(password)
         user.save()
+        return user
 
-        return self.create_user(email, user_name, password, **other_fields)
+    def create_superuser(self, user_name, password=None):
+        user = self.create_user(
+            user_name,
+            password=password,
+        )
+
+        user.is_admin = True
+        user.is_superuser = True
+        user.save()
+        return user
 
 
 
@@ -58,10 +47,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         validators=[username_validator], error_messages={ "unique": _("Пользователь с таким ником уже существует"),},)
     first_name = models.CharField(_("first_name"), max_length=150, blank=True)
     last_name = models.CharField(_("last_name"), max_length=150, blank=True)
-    email = models.EmailField(_('email'), unique=True)
+    email = models.EmailField(_('email'), blank=True)
     mobile = models.CharField(_("mobile"), max_length=20, blank=True)
-    age = models.SmallIntegerField(_("age"))
-    avatar = models.FileField(_("avatar"))
+    age = models.SmallIntegerField(_("age"), blank=True, null=True)
+    avatar = models.FileField(_("avatar"), blank=True)
 
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -73,7 +62,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'user_name'
 
-    objects = CustomAccountManager()
+    objects = UserManager()
     
 
     class Meta:
@@ -94,4 +83,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def send_email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
-
+    def __str__(self):
+        return self.user_name
