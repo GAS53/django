@@ -1,0 +1,374 @@
+[usb] pm3 --> hw connect
+[=] Using UART port /dev/ttyACM0
+[=] Communicating with PM3 over USB-CDC
+
+
+метка №1 мобильный обходчик hf
+
+TYPE: NTAG 213 144bytes (NT2H1311G0DU)  
+[+]        UID: 04 87 53 8A 50 5D 80 
+[+]     UID[0]: 04, NXP Semiconductors Germany
+[+]       BCC0: 58 ( ok )
+[+]       BCC1: 07 ( ok )
+[+]   Internal: 48 ( default )
+[+]       Lock: 00 00  - 0000000000000000
+[+] OneTimePad: E1 10 12 00  - 11100001000100000001001000000000
+
+[=] --- NDEF Message
+[+] Capability Container: E1 10 12 00 
+[+]   E1: NDEF Magic Number
+[+]   10: version 0.1 supported by tag
+[+]        : Read access granted without any security / Write access granted without any security
+[+]   12: Physical Memory Size: 144 bytes
+[+]   12: NDEF Memory Size: 144 bytes
+[+]   Additional feature information
+[+]   00
+[+]   00000000
+[+]   xxx      - 00: RFU ( ok )
+[+]      x     - 00: don't support special frame
+[+]       x    - 00: don't support lock block
+[+]        xx  - 00: RFU ( ok )
+[+]          x - 00: IC don't support multiple block reads
+
+[=] --- Tag Counter
+[=]        [02]: 00 00 00 
+[+]             - BD tearing ( ok )
+
+[=] --- Tag Signature
+[=]  IC signature public key name: NXP NTAG21x (2013)
+[=] IC signature public key value: 04494E1A386D3D3CFE3DC10E5DE68A499B1C202DB5B132393E89ED19FE5BE8BC61
+[=]     Elliptic curve parameters: NID_secp128r1
+[=]              TAG IC Signature: 883432C6DE522C788AE5EBCB287665289AD58719DF015922BCA993E95EA1E40A
+[+]        Signature verification ( successful )
+
+[=] --- Tag Silicon Information
+[=]        Wafer Counter: 17541649 ( 0x10BAA11 )
+[=]    Wafer Coordinates: x 135, y 83 (0x87, 0x53)
+[=]            Test Site: 2
+
+[=] --- Tag Version
+[=]        Raw bytes: 00 04 04 02 01 00 0F 03 
+[=]        Vendor ID: 04, NXP Semiconductors Germany
+[=]     Product type: 04, NTAG
+[=]  Product subtype: 02, 50pF
+[=]    Major version: 01
+[=]    Minor version: 00
+[=]             Size: 0F, (256 <-> 128 bytes)
+[=]    Protocol type: 03, ISO14443-3 Compliant
+
+[=] --- Tag Configuration
+[=]   cfg0 [41/0x29]: 04 00 00 FF 
+[=]                     - strong modulation mode disabled
+[=]                     - pages don't need authentication
+[=]   cfg1 [42/0x2A]: 00 05 00 00 
+[=]                     - Unlimited password attempts
+[=]                     - NFC counter disabled
+[=]                     - NFC counter not protected
+[=]                     - user configuration writeable
+[=]                     - write access is protected with password
+[=]                     - 05, Virtual Card Type Identifier is default
+[=]   PWD  [43/0x2B]: 00 00 00 00 - (cannot be read)
+[=]   PACK [44/0x2C]: 00 00       - (cannot be read)
+[=]   RFU  [44/0x2C]:       00 00 - (cannot be read)
+
+[+] --- Known EV1/NTAG passwords
+[+] Found default password FF FF FF FF  pack 00 00
+[=] ------------------------ Fingerprint -----------------------
+[=] Reading tag memory...
+[=] ------------------------------------------------------------
+
+
+
+
+ключ от качалки №1 lf
+
+NOTE: some demods output possible binary
+[=] if it finds something that looks like a tag
+[=] False Positives ARE possible
+[=] 
+[=] Checking for known tags...
+[=] 
+[+] EM 410x ID 0300419CC4
+[+] EM410x ( RF/64 )
+[=] -------- Possible de-scramble patterns ---------
+[+] Unique TAG ID      : C000823923
+[=] HoneyWell IdentKey
+[+]     DEZ 8          : 04299972
+[+]     DEZ 10         : 0004299972
+[+]     DEZ 5.5        : 00065.40132
+[+]     DEZ 3.5A       : 003.40132
+[+]     DEZ 3.5B       : 000.40132
+[+]     DEZ 3.5C       : 065.40132
+[+]     DEZ 14/IK2     : 00012889201860
+[+]     DEZ 15/IK3     : 000824642255139
+[+]     DEZ 20/ZK      : 12000000080203090203
+[=] 
+[+] Other              : 40132_065_04299972
+[+] Pattern Paxton     : 55958212 [0x355DAC4]
+[+] Pattern 1          : 8544597 [0x826155]
+[+] Pattern Sebury     : 40132 65 4299972  [0x9CC4 0x41 0x419CC4]
+[=] ------------------------------------------------
+
+[+] Valid EM410x ID found!
+
+[=] Couldn't identify a chipset
+
+
+
+ключ от качалки №2 lf (с надписью
+
+NOTE: some demods output possible binary
+[=] if it finds something that looks like a tag
+[=] False Positives ARE possible
+[=] 
+[=] Checking for known tags...
+[=] 
+[+] EM 410x ID 15000E041A
+[+] EM410x ( RF/64 )
+[=] -------- Possible de-scramble patterns ---------
+[+] Unique TAG ID      : A800702058
+[=] HoneyWell IdentKey
+[+]     DEZ 8          : 00918554
+[+]     DEZ 10         : 0000918554
+[+]     DEZ 5.5        : 00014.01050
+[+]     DEZ 3.5A       : 021.01050
+[+]     DEZ 3.5B       : 000.01050
+[+]     DEZ 3.5C       : 014.01050
+[+]     DEZ 14/IK2     : 00090195231770
+[+]     DEZ 15/IK3     : 000721561854040
+[+]     DEZ 20/ZK      : 10080000070002000508
+[=] 
+[+] Other              : 01050_014_00918554
+[+] Pattern Paxton     : 354566682 [0x1522421A]
+[+] Pattern 1          : 853036 [0xD042C]
+[+] Pattern Sebury     : 1050 14 918554  [0x41A 0xE 0xE041A]
+[=] ------------------------------------------------
+
+[+] Valid EM410x ID found!
+
+
+
+
+Домофон 
+
+[=] NOTE: some demods output possible binary
+[=] if it finds something that looks like a tag
+[=] False Positives ARE possible
+[=] 
+[=] Checking for known tags...
+[=] 
+[+] EM 410x ID 0A000DF94D
+[+] EM410x ( RF/64 )
+[=] -------- Possible de-scramble patterns ---------
+[+] Unique TAG ID      : 5000B09FB2
+[=] HoneyWell IdentKey
+[+]     DEZ 8          : 00915789
+[+]     DEZ 10         : 0000915789
+[+]     DEZ 5.5        : 00013.63821
+[+]     DEZ 3.5A       : 010.63821
+[+]     DEZ 3.5B       : 000.63821
+[+]     DEZ 3.5C       : 013.63821
+[+]     DEZ 14/IK2     : 00042950588749
+[+]     DEZ 15/IK3     : 000343608958898
+[+]     DEZ 20/ZK      : 05000000110009151102
+[=] 
+[+] Other              : 63821_013_00915789
+[+] Pattern Paxton     : 170014541 [0xA22374D]
+[+] Pattern 1          : 522066 [0x7F752]
+[+] Pattern Sebury     : 63821 13 915789  [0xF94D 0xD 0xDF94D]
+[=] ------------------------------------------------
+
+[+] Valid EM410x ID found!
+
+
+
+
+
+
+Пропуск от работы старый
+
+[=] NOTE: some demods output possible binary
+[=] if it finds something that looks like a tag
+[=] False Positives ARE possible
+[=] 
+[=] Checking for known tags...
+[=] 
+[+] Indala (len 64)  Raw: a0000000e8f91261
+[+] Fmt 26 FC: 177 Card: 46417 Parity: 10
+[+] Possible de-scramble patterns
+[+]     Printed     | __0155__ [0x9B]
+[+]     Internal ID | 1761153633
+[+]     Heden-2L    | 45778
+
+[+] Valid Indala ID found!
+
+[=] Couldn't identify a chipset
+
+
+Новый проууск
+a
+Searching for ISO14443-A tag...          
+[+]  UID: 64 E8 AB 4A 
+[+] ATQA: 00 04
+[+]  SAK: 08 [2]
+[+] Possible types:
+[+]    MIFARE Classic 1K
+[=] proprietary non iso14443-4 card found, RATS not supported
+[#] BCC0 incorrect, got 0x00, expected 0x01
+[#] Aborting
+[#] Auth error
+[?] Hint: try `hf mf` commands
+
+
+
+метка мобильного обходчика перечеркнутая
+--- Tag Information --------------------------
+[=] -------------------------------------------------------------
+[+]       TYPE: NTAG 213 144bytes (NT2H1311G0DU)  
+[+]        UID: 04 EE 6A 8A 50 5D 80 
+[+]     UID[0]: 04, NXP Semiconductors Germany
+[+]       BCC0: 08 ( ok )
+[+]       BCC1: 07 ( ok )
+[+]   Internal: 48 ( default )
+[+]       Lock: 00 00  - 0000000000000000
+[+] OneTimePad: E1 10 12 00  - 11100001000100000001001000000000
+
+[=] --- NDEF Message
+[+] Capability Container: E1 10 12 00 
+[+]   E1: NDEF Magic Number
+[+]   10: version 0.1 supported by tag
+[+]        : Read access granted without any security / Write access granted without any security
+[+]   12: Physical Memory Size: 144 bytes
+[+]   12: NDEF Memory Size: 144 bytes
+[+]   Additional feature information
+[+]   00
+[+]   00000000
+[+]   xxx      - 00: RFU ( ok )
+[+]      x     - 00: don't support special frame
+[+]       x    - 00: don't support lock block
+[+]        xx  - 00: RFU ( ok )
+[+]          x - 00: IC don't support multiple block reads
+
+[=] --- Tag Counter
+[=]        [02]: 00 00 00 
+[+]             - BD tearing ( ok )
+
+[=] --- Tag Signature
+[=]  IC signature public key name: NXP NTAG21x (2013)
+[=] IC signature public key value: 04494E1A386D3D3CFE3DC10E5DE68A499B1C202DB5B132393E89ED19FE5BE8BC61
+[=]     Elliptic curve parameters: NID_secp128r1
+[=]              TAG IC Signature: 5E91CFD1A307F80A006E18463434213D4134F47CCBF8064F4B8305DF52220648
+[+]        Signature verification ( successful )
+
+[=] --- Tag Silicon Information
+[=]        Wafer Counter: 17541649 ( 0x10BAA11 )
+[=]    Wafer Coordinates: x 238, y 106 (0xEE, 0x6A)
+[=]            Test Site: 2
+
+[=] --- Tag Version
+[=]        Raw bytes: 00 04 04 02 01 00 0F 03 
+[=]        Vendor ID: 04, NXP Semiconductors Germany
+[=]     Product type: 04, NTAG
+[=]  Product subtype: 02, 50pF
+[=]    Major version: 01
+[=]    Minor version: 00
+[=]             Size: 0F, (256 <-> 128 bytes)
+[=]    Protocol type: 03, ISO14443-3 Compliant
+
+[=] --- Tag Configuration
+[=]   cfg0 [41/0x29]: 04 00 00 FF 
+[=]                     - strong modulation mode disabled
+[=]                     - pages don't need authentication
+[=]   cfg1 [42/0x2A]: 00 05 00 00 
+[=]                     - Unlimited password attempts
+[=]                     - NFC counter disabled
+[=]                     - NFC counter not protected
+[=]                     - user configuration writeable
+[=]                     - write access is protected with password
+[=]                     - 05, Virtual Card Type Identifier is default
+[=]   PWD  [43/0x2B]: 00 00 00 00 - (cannot be read)
+[=]   PACK [44/0x2C]: 00 00       - (cannot be read)
+[=]   RFU  [44/0x2C]:       00 00 - (cannot be read)
+
+[+] --- Known EV1/NTAG passwords
+[+] Found default password FF FF FF FF  pack 00 00
+[=] ------------------------ Fingerprint -----------------------
+[=] Reading tag memory...
+[=] ------------------------------------------------------------
+
+
+
+не перечеркнута метка
+--- Tag Information --------------------------
+[=] -------------------------------------------------------------
+[+]       TYPE: NTAG 213 144bytes (NT2H1311G0DU)  
+[+]        UID: 04 87 53 8A 50 5D 80 
+[+]     UID[0]: 04, NXP Semiconductors Germany
+[+]       BCC0: 58 ( ok )
+[+]       BCC1: 07 ( ok )
+[+]   Internal: 48 ( default )
+[+]       Lock: 00 00  - 0000000000000000
+[+] OneTimePad: E1 10 12 00  - 11100001000100000001001000000000
+
+[=] --- NDEF Message
+[+] Capability Container: E1 10 12 00 
+[+]   E1: NDEF Magic Number
+[+]   10: version 0.1 supported by tag
+[+]        : Read access granted without any security / Write access granted without any security
+[+]   12: Physical Memory Size: 144 bytes
+[+]   12: NDEF Memory Size: 144 bytes
+[+]   Additional feature information
+[+]   00
+[+]   00000000
+[+]   xxx      - 00: RFU ( ok )
+[+]      x     - 00: don't support special frame
+[+]       x    - 00: don't support lock block
+[+]        xx  - 00: RFU ( ok )
+[+]          x - 00: IC don't support multiple block reads
+
+[=] --- Tag Counter
+[=]        [02]: 00 00 00 
+[+]             - BD tearing ( ok )
+
+[=] --- Tag Signature
+[=]  IC signature public key name: NXP NTAG21x (2013)
+[=] IC signature public key value: 04494E1A386D3D3CFE3DC10E5DE68A499B1C202DB5B132393E89ED19FE5BE8BC61
+[=]     Elliptic curve parameters: NID_secp128r1
+[=]              TAG IC Signature: 883432C6DE522C788AE5EBCB287665289AD58719DF015922BCA993E95EA1E40A
+[+]        Signature verification ( successful )
+
+[=] --- Tag Silicon Information
+[=]        Wafer Counter: 17541649 ( 0x10BAA11 )
+[=]    Wafer Coordinates: x 135, y 83 (0x87, 0x53)
+[=]            Test Site: 2
+
+[=] --- Tag Version
+[=]        Raw bytes: 00 04 04 02 01 00 0F 03 
+[=]        Vendor ID: 04, NXP Semiconductors Germany
+[=]     Product type: 04, NTAG
+[=]  Product subtype: 02, 50pF
+[=]    Major version: 01
+[=]    Minor version: 00
+[=]             Size: 0F, (256 <-> 128 bytes)
+[=]    Protocol type: 03, ISO14443-3 Compliant
+
+[=] --- Tag Configuration
+[=]   cfg0 [41/0x29]: 04 00 00 FF 
+[=]                     - strong modulation mode disabled
+[=]                     - pages don't need authentication
+[=]   cfg1 [42/0x2A]: 00 05 00 00 
+[=]                     - Unlimited password attempts
+[=]                     - NFC counter disabled
+[=]                     - NFC counter not protected
+[=]                     - user configuration writeable
+[=]                     - write access is protected with password
+[=]                     - 05, Virtual Card Type Identifier is default
+[=]   PWD  [43/0x2B]: 00 00 00 00 - (cannot be read)
+[=]   PACK [44/0x2C]: 00 00       - (cannot be read)
+[=]   RFU  [44/0x2C]:       00 00 - (cannot be read)
+
+[+] --- Known EV1/NTAG passwords
+[+] Found default password FF FF FF FF  pack 00 00
+[=] ------------------------ Fingerprint -----------------------
+[=] Reading tag memory...
+[=] ------------------------------------------------------------

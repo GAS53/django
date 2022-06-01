@@ -54,14 +54,14 @@ class CustomAccountManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     username_validator = ASCIIUsernameValidator()
-    user_name = models.CharField(max_length=150, unique=True, help_text=_("Не больше 150 символов"),
+    user_name = models.CharField(_("user_name"), max_length=150, unique=True, help_text=_("Не больше 150 символов"),
         validators=[username_validator], error_messages={ "unique": _("Пользователь с таким ником уже существует"),},)
-    first_name = models.CharField(_('Имя'), max_length=150, blank=True)
-    last_name = models.CharField(_('Фамилия'), max_length=150, blank=True)
-    email = models.EmailField(_('email address'), unique=True)
-    mobile = models.CharField(max_length=20, blank=True)
-    avatar = models.FileField(verbose_name='аватарка')
-    age = models.SmallIntegerField(verbose_name='Возраст')
+    first_name = models.CharField(_("first_name"), max_length=150, blank=True)
+    last_name = models.CharField(_("last_name"), max_length=150, blank=True)
+    email = models.EmailField(_('email'), unique=True)
+    mobile = models.CharField(_("mobile"), max_length=20, blank=True)
+    age = models.SmallIntegerField(_("age"))
+    avatar = models.FileField(_("avatar"))
 
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -71,7 +71,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'user_name'
 
     objects = CustomAccountManager()
     

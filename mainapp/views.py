@@ -31,6 +31,7 @@ class NewsPageDetailView(TemplateView):
 
 
 class NewsListView(ListView):
+    template_name = 'mainapp/news.html'
     model = mainapp_models.News
     paginate_by = 5
 
