@@ -22,11 +22,7 @@ class CustomLoginView(LoginView):
     def form_invalid(self, form):
         for _unused, msg in form.error_messages.items():
             msg = 'Введены неправильные логин и/или пароль'
-            messages.add_message(
-                self.request,
-                messages.WARNING,
-                mark_safe(f"Что-то пошло не так:<br>{msg}"),
-                )
+            messages.add_message(self.request, messages.WARNING,mark_safe(f"Что-то пошло не так:<br>{msg}"),)
         return self.render_to_response(self.get_context_data(form=form))
 
 class CustomLogoutView(LogoutView):

@@ -181,3 +181,6 @@ EMAIL_USE_TLS = True # google True , yandex - False
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'var', 'email_messages')
+
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
