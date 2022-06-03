@@ -18,7 +18,7 @@ if DEBUG:
     INTERNAL_IPS = ["127.0.0.1",]
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'authapp.apps.AuthappConfig',
     'social_django',
     'crispy_forms',
+    "debug_toolbar",
 
 
 ]
@@ -47,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -150,7 +152,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     )
 
-SOCIAL_AUTH_GITHUB_KEY = '8b4874c2b4c54df66fe3'
+SOCIAL_AUTH_GITHUB_KEY =  os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('django_git_password')
 AUTH_USER_MODEL = 'authapp.CustomUser'
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -170,17 +172,28 @@ LOGGING = {
     "loggers": {"django": {"level": "INFO", "handlers": ["console"]},
     },
 }
+
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+
 # глобально
-EMAIL_HOST = "localhost" #'smtp.yandex.ru'
+EMAIL_HOST = 'smtp.mail.ru'#"localhost" 
 EMAIL_PORT = "465" # 465- mail, yandex
 EMAIL_HOST_USER = os.environ.get('email') #"django@geekshop.local" # myname@yandex.ru
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') #
-EMAIL_USE_SSL = False # yandex True # google False
-EMAIL_USE_TLS = True # google True , yandex - False
-
+EMAIL_USE_SSL = True # yandex True # google False
+EMAIL_USE_TLS = False # google True , yandex - False
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'var', 'email_messages')
+# локально
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'var', 'email_messages')
+# EMAIL_FILE_PATH = "var/email-messages/"
 
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+# консоль
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False

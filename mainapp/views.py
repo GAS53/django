@@ -16,10 +16,11 @@ import logging
 from django.conf import settings
 from django.contrib import messages
 from django.core.cache import cache
-
+from django.utils.translation import gettext_lazy as _
 from mainapp import forms as mainapp_forms
 from mainapp import models as mainapp_models
-from mainapp import tasks as mainapp_tasks
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -118,11 +119,14 @@ class ContactsPageView(TemplateView):
         return context
 
     def post(self, *args, **kwargs):
+        print(self.request.POST)
         if self.request.user.is_authenticated:
             cache_lock_flag = cache.get(f"mail_feedback_lock_{self.request.user.pk}")
             if not cache_lock_flag:
                 cache.set(f"mail_feedback_lock_{self.request.user.pk}", "lock",timeout=300,)
+                
                 messages.add_message(self.request, messages.INFO, _("Message sended"))
+                
                 mainapp_tasks.send_feedback_mail.delay(
                     {
                     "user_id": self.request.POST.get("user_id"),

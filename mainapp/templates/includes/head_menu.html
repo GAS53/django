@@ -21,6 +21,11 @@
                 </li>
 
                 </li>
+
+                <li
+                    class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.ContactsPageView' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'mainapp:contacts' %}">Контакты</a>
+                </li>
                 {% if user.is_active %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="ddProfile" role="button" data-toggle="dropdown"
@@ -29,36 +34,23 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="ddProfile">
                         <a class="dropdown-item"
-                            href="{% url 'authapp:profile_edit' pk=request.user.pk %}{% url 'authapp:login' %} ">Редактировать
+                            href="{% url 'authapp:profile_edit' pk=request.user.pk %} ">Редактировать
                             профиль</a>
 
                         <a class="dropdown-item" href="{% url 'mainapp:courses' %}">Мои курсы</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Модерация</a>
-                        {% if user.is_supreuser %}
+
                         <a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Административный
                             раздел</a>
                         <a class="dropdown-item" href="{% url 'mainapp:log_view' %}" target="_blank">Лог</a>
-                        {% endif %}
 
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'authapp:logout' %}">Выход</a>
                     </div>
                 </li>
+                <a class="nav-link" href="{% url 'authapp:logout' %}">Выход</a>
                 {% else %}
-                <a class="nav-link" href="{% url 'authapp:login' %}">вход</a>
+                <a class="nav-link" href="{% url 'authapp:login' %}">Вход</a>
                 {% endif %}
-                <li
-                    class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.ContactsPageView' %}active{% endif %}">
-                    <a class="nav-link" href="{% url 'mainapp:contacts' %}">Контакты</a>
-                </li>
-                <li
-                    class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.ContactsPageView' %}active{% endif %}">
-                    <!-- '''if user вошел то ссылка на выход и наоборот''' -->
-
-
-                </li>
-
             </ul>
             <span><a href="#">🇷🇺</a> <i class="fas fa-grip-lines-vertical"></i> <a href="#">🇬🇧</a></span>
         </div>
