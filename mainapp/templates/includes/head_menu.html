@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{% url 'mainapp:main_page' %}">
             <img src="/static/img/logo.png" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -12,35 +12,45 @@
             <ul class="navbar-nav mr-auto">
                 <li
                     class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.News' %}active{% endif %}">
-                    <a class="nav-link" href="news.html">Новости</a>
+                    <a class="nav-link" href="{% url 'mainapp:news' %}">Новости</a>
                 </li>
 
                 <li
                     class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.Courses' %}active{% endif %}">
-                    <a class="nav-link" href="courses_list.html">Курсы</a>
+                    <a class="nav-link" href="{% url 'mainapp:courses' %}">Курсы</a>
                 </li>
 
                 </li>
+
+                <li
+                    class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.ContactsPageView' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'mainapp:contacts' %}">Контакты</a>
+                </li>
+                {% if user.is_active %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="ddProfile" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         Профиль
                     </a>
                     <div class="dropdown-menu" aria-labelledby="ddProfile">
-                        <a class="dropdown-item" href="#">Редактировать профиль</a>
-                        <a class="dropdown-item" href="#">Мои курсы</a>
+                        <a class="dropdown-item"
+                            href="{% url 'authapp:profile_edit' pk=request.user.pk %} ">Редактировать
+                            профиль</a>
+
+                        <a class="dropdown-item" href="{% url 'mainapp:courses' %}">Мои курсы</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Модерация</a>
-                        <a class="dropdown-item" href="#">Административный раздел</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Выход</a>
+
+                        <a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Административный
+                            раздел</a>
+                        <a class="dropdown-item" href="{% url 'mainapp:log_view' %}" target="_blank">Лог</a>
+
                     </div>
                 </li>
-                <li
-                    class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.ContactsPageView' %}active{% endif %}">
-                    <a class="nav-link" href="contacts.html">Контакты</a>
-                </li>
-
+                <a class="nav-link" href="{% url 'authapp:logout' %}">Выход</a>
+                {% else %}
+                <a class="nav-link" href="{% url 'authapp:login' %}">Вход</a>
+                {% endif %}
             </ul>
             <span><a href="#">🇷🇺</a> <i class="fas fa-grip-lines-vertical"></i> <a href="#">🇬🇧</a></span>
         </div>

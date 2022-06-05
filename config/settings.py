@@ -10,12 +10,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)8%fdb3%51xymravhh$zl#u^3#5dmipoui(^f@v##8x#8hmf%^'
+SECRET_KEY = os.environ.get('django_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if DEBUG:
+    INTERNAL_IPS = ["127.0.0.1",]
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -29,6 +32,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'markdownify.apps.MarkdownifyConfig',
+    'authapp.apps.AuthappConfig',
+    'social_django',
+    'crispy_forms',
+    "debug_toolbar",
+
+
 ]
 
 MIDDLEWARE = [
@@ -39,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -50,17 +60,28 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                # "mainapp.context_processors.example.simple_context_processor",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.template.context_processors.media",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "mainapp.context_processors.example.simple_context_processor",
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
 
         'libraries':{'email_to_link':'mainapp.context_processors.example'}
         },
     },
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+        "OPTIONS": {
+        "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },}}
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -77,8 +98,6 @@ DATABASES = {
 
 
 # Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -122,3 +141,59 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+AUTH_USER_MODEL = "authapp.CustomUser"
+LOGIN_REDIRECT_URL = "mainapp:main_page"
+LOGOUT_REDIRECT_URL = "mainapp:main_page"
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.github.GithubOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
+    )
+
+SOCIAL_AUTH_GITHUB_KEY =  os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('django_git_password')
+AUTH_USER_MODEL = 'authapp.CustomUser'
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+LOG_FILE = BASE_DIR / "var" / "log" / "main_log.log"
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console": {
+            "format": "[%(asctime)s] %(levelname)s %(name)s (%(lineno)d)%(message)s"},
+    },
+    "handlers": {
+        "console": {"class": "logging.StreamHandler", "formatter": "console"}, },
+    "loggers": {"django": {"level": "INFO", "handlers": ["console"]},
+    },
+}
+
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+
+# глобально
+EMAIL_HOST = 'smtp.mail.ru'#"localhost" 
+EMAIL_PORT = "465" # 465- mail, yandex
+EMAIL_HOST_USER = os.environ.get('email') #"django@geekshop.local" # myname@yandex.ru
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') #
+EMAIL_USE_SSL = True # yandex True # google False
+EMAIL_USE_TLS = False # google True , yandex - False
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# локально
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'var', 'email_messages')
+# EMAIL_FILE_PATH = "var/email-messages/"
+
+# консоль
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False

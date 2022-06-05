@@ -1,13 +1,21 @@
+from tabnanny import verbose
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth import get_user_model
 
 class News(models.Model):
     title = models.CharField(max_length=256, verbose_name='Заголовок')
-    preable = models.CharField(max_length=1024, verbose_name="Вступление")
+    preambule = models.CharField(max_length=1024, verbose_name="Вступление")
     body = models.TextField(blank=True, null=True, verbose_name="Основной текст")
     body_as_markdown = models.BooleanField(default=False, verbose_name="As markdown")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
     updated = models.DateTimeField(auto_now=True, verbose_name="Edited", editable=False)
     deleted = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = _("Новости")
+        verbose_name_plural = _("Новости")
+        ordering = ("-created",)
 
     def __str__(self) -> str:
         return f"{self.pk} {self.title}" #pk- primary key
@@ -41,6 +49,10 @@ class Courses(models.Model):
     def delete(self, *args):
         self.deleted = True
         self.save()
+
+    class Meta:
+        verbose_name = ('Курс')
+        verbose_name_plural = ('Курсы')
 
 class Lesson(models.Model):
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
@@ -76,3 +88,16 @@ class CourseTeachers(models.Model):
         self.deleted = True
         self.save()
 
+class CourseFeedback(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name=_("User"))
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE, verbose_name=_("Course"))
+    feedback = models.TextField(default=_("No feedback"), verbose_name=_("Feedback"))
+
+    RATING = ((5, "⭐⭐⭐⭐⭐"), (4, "⭐⭐⭐⭐"), (3, "⭐⭐⭐"), (2, "⭐⭐"),(1, "⭐"))
+    rating = models.SmallIntegerField(choices=RATING, default=5, verbose_name=_("Rating"))
+    
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Created")
+    deleted = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f"{self.course} ({self.user})"
