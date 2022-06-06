@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -68,6 +69,7 @@ TEMPLATES = [
                 "mainapp.context_processors.example.simple_context_processor",
                 "social_django.context_processors.backends",
                 "social_django.context_processors.login_redirect",
+                
             ],
 
         'libraries':{'email_to_link':'mainapp.context_processors.example'}
@@ -122,6 +124,7 @@ LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
+LOCALE_PATH = [BASE_DIR / 'locale']
 
 USE_TZ = True
 
