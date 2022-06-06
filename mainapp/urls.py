@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from mainapp import views
 from mainapp.apps import MainappConfig
 from django.views.decorators.cache import cache_page
@@ -7,7 +7,7 @@ app_name = MainappConfig.name
 
 urlpatterns = [
     path("", views.MainPageView.as_view(), name="main_page"),
-    path("news/", views.NewsListView.as_view(), name="news"),
+    path("news/", views.newsListView, name="news"),
     path("news/create/", views.NewsCreateView.as_view(), name="news_create"),
     path("news/<int:pk>/detail",views.NewsDetailView.as_view(),name="news_detail",),
     path("news/<int:pk>/update",views.NewsUpdateView.as_view(),name="news_update",),

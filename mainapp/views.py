@@ -19,6 +19,8 @@ from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
 from mainapp import forms as mainapp_forms
 from mainapp import models as mainapp_models
+from django.core.paginator import Paginator
+from django.shortcuts import render
 
 
 
@@ -45,13 +47,26 @@ class NewsPageDetailView(TemplateView):
         return context
 
 
-class NewsListView(ListView):
-    template_name = 'mainapp/news.html'
-    model = mainapp_models.News
-    paginate_by = 5
+# class NewsListView(ListView):
+#     template_name = 'mainapp/news.html'
+#     model = mainapp_models.News
+#     paginate_by = 5
 
-    def get_queryset(self):
-        return super().get_queryset().filter(deleted=False)
+#     def get_queryset(self):
+#         return super().get_queryset().filter(deleted=False)
+
+def newsListView(request):
+    model = mainapp_models.News
+    contact_list = model.objects.all()
+    paginator = Paginator(contact_list, 5) 
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'mainapp/news.html', {'page_obj': page_obj})
+
+
+
+
 
 class NewsCreateView(PermissionRequiredMixin, CreateView):
     model = mainapp_models.News
