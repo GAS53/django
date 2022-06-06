@@ -19,39 +19,39 @@
 
                 <li
                     class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.Courses' %}active{% endif %}">
-                    <a class="nav-link" href="{% url 'mainapp:courses' %}">{% translate "Courses" %}</a>
+                    <a class="nav-link" href="{% url 'mainapp:courses' %}">{% translate "Курсы" %}</a>
                 </li>
 
                 </li>
 
                 <li
                     class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.ContactsPageView' %}active{% endif %}">
-                    <a class="nav-link" href="{% url 'mainapp:contacts' %}">{% translate "Contacts" %}</a>
+                    <a class="nav-link" href="{% url 'mainapp:contacts' %}">{% translate "Контакты" %}</a>
                 </li>
                 {% if user.is_active %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="ddProfile" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        Профиль
+                        {% translate Профиль %}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="ddProfile">
                         <a class="dropdown-item" href="{% url 'authapp:profile_edit' pk=request.user.pk %} ">{%
-                            translate "Edit profile" %}</a>
+                            translate "Редактировать профиль" %}</a>
 
                         <a class="dropdown-item" href="{% url 'mainapp:courses' %}">Мои курсы</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Модерация</a>
 
-                        <a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">{% translate "Admin
-                            page" %}</a>
-                        <a class="dropdown-item" href="{% url 'mainapp:log_view' %}" target="_blank">{% translate "Logs"
+                        <a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">{% translate "Страница
+                            администартора" %}</a>
+                        <a class="dropdown-item" href="{% url 'mainapp:log_view' %}" target="_blank">{% translate "Логи"
                             %}</a>
 
                     </div>
                 </li>
-                <a class="nav-link" href="{% url 'authapp:logout' %}">{% translate "logout" %}</a>
+                <a class="nav-link" href="{% url 'authapp:logout' %}">{% translate "Выход" %}</a>
                 {% else %}
-                <a class="nav-link" href="{% url 'authapp:login' %}">{% translate "login" %}</a>
+                <a class="nav-link" href="{% url 'authapp:login' %}">{% translate "Вход" %}</a>
                 {% endif %}
             </ul>
             <div class="row justify-content-end m-0">

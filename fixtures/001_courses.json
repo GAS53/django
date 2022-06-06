@@ -1,0 +1,114 @@
+[
+    {
+        "model": "mainapp.courses",
+        "pk": 1,
+        "fields": {
+            "name": "Курс_1",
+            "description": "описание",
+            "description_as_markdown": false,
+            "cost": "2000.00",
+            "cover": "no_image.svg",
+            "created": "2022-06-06T14:41:33.551Z",
+            "updated": "2022-06-06T14:41:33.551Z",
+            "deleted": false
+        }
+    }
+        {
+        "model": "mainapp.courses",
+        "pk": 2,
+        "fields": {
+            "name": "Курс_2",
+            "description": "описание",
+            "description_as_markdown": false,
+            "cost": "2000.00",
+            "cover": "no_image.svg",
+            "created": "2022-06-06T14:41:33.551Z",
+            "updated": "2022-06-06T14:41:33.551Z",
+            "deleted": false
+        }
+    }
+            {
+        "model": "mainapp.courses",
+        "pk": 3,
+        "fields": {
+            "name": "Курс_3",
+            "description": "описание",
+            "description_as_markdown": false,
+            "cost": "2000.00",
+            "cover": "no_image.svg",
+            "created": "2022-06-06T14:41:33.551Z",
+            "updated": "2022-06-06T14:41:33.551Z",
+            "deleted": false
+        }
+    }
+        {
+        "model": "mainapp.courses",
+        "pk": 4,
+        "fields": {
+            "name": "Курс_4",
+            "description": "описание",
+            "description_as_markdown": false,
+            "cost": "2000.00",
+            "cover": "no_image.svg",
+            "created": "2022-06-06T14:41:33.551Z",
+            "updated": "2022-06-06T14:41:33.551Z",
+            "deleted": false
+        }
+    }
+            {
+        "model": "mainapp.courses",
+        "pk": 5,
+        "fields": {
+            "name": "Курс_5",
+            "description": "описание",
+            "description_as_markdown": false,
+            "cost": "2000.00",
+            "cover": "no_image.svg",
+            "created": "2022-06-06T14:41:33.551Z",
+            "updated": "2022-06-06T14:41:33.551Z",
+            "deleted": false
+        }
+    }
+                {
+        "model": "mainapp.courses",
+        "pk": 6,
+        "fields": {
+            "name": "Курс_6",
+            "description": "описание",
+            "description_as_markdown": false,
+            "cost": "2000.00",
+            "cover": "no_image.svg",
+            "created": "2022-06-06T14:41:33.551Z",
+            "updated": "2022-06-06T14:41:33.551Z",
+            "deleted": false
+        }
+    }
+                    {
+        "model": "mainapp.courses",
+        "pk": 7,
+        "fields": {
+            "name": "Курс_7",
+            "description": "описание",
+            "description_as_markdown": false,
+            "cost": "2000.00",
+            "cover": "no_image.svg",
+            "created": "2022-06-06T14:41:33.551Z",
+            "updated": "2022-06-06T14:41:33.551Z",
+            "deleted": false
+        }
+    }
+                        {
+        "model": "mainapp.courses",
+        "pk": 8,
+        "fields": {
+            "name": "Курс_8",
+            "description": "описание",
+            "description_as_markdown": false,
+            "cost": "2000.00",
+            "cover": "no_image.svg",
+            "created": "2022-06-06T14:41:33.551Z",
+            "updated": "2022-06-06T14:41:33.551Z",
+            "deleted": false
+        }
+    }
+]

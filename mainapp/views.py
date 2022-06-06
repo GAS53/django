@@ -91,10 +91,12 @@ class NewsDeleteView(PermissionRequiredMixin, DeleteView):
 
 class CoursesListView(TemplateView):
     template_name = "mainapp/courses_list.html"
+    # paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(CoursesListView, self).get_context_data(**kwargs)
-        context["objects"] = mainapp_models.Courses.objects.all()[:7]
+        context["objects"] = mainapp_models.Courses.objects.all()
+        
         return context
 
 class CoursesDetailView(TemplateView):
