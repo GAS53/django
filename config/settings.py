@@ -10,15 +10,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('django_key')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+DEBUG = False
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 if DEBUG:
-    INTERNAL_IPS = ["127.0.0.1",]
+    ALLOWED_HOSTS = ['*']
+    STATICFILES_DIRS = (
+        os.path.join(SITE_ROOT, 'static/'),
+        )
+else:
+    ALLOWED_HOSTS = ['127.0.0.1', '192.168.2.81', 'localhost']
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+        # STATICFILES_FINDERS = (
+        #     'django.contrib.staticfiles.finders.FileSystemFinder',
+        #     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        # )
 
 
-ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -91,12 +107,22 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dz',
+            'USER': 'myprojectuser',
+            'PASSWORD': 'password',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
 
 
 # Password validation
@@ -132,11 +158,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
-STATICFILES_DIRS = (
-  os.path.join(SITE_ROOT, 'static/'),
-)
+
 
 
 # Default primary key field type
@@ -144,7 +166,7 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = "/media/"
+
 MEDIA_ROOT = BASE_DIR / "media"
 AUTH_USER_MODEL = "authapp.CustomUser"
 LOGIN_REDIRECT_URL = "mainapp:main_page"
